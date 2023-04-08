@@ -1,12 +1,18 @@
-import Header from './components/header/header.component';
-import Directory from './components/directory/directory.component';
+import { Routes, Route } from 'react-router-dom';
+import SignIn from './components/sign-in/sign-in.component';
+import Home from './routes/home/home.component';
+import Navigation from './routes/navigation/navigation.component';
+import Shop from './routes/shop/shop.component';
 
 const App = () => {
   return (
-    <div className='App'>
-      <Header />
-      <Directory />
-    </div>
+    <Routes>
+      <Route path='/' element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        <Route path='/shop' element={<Shop />} />
+      </Route>
+    </Routes>
   );
 };
 

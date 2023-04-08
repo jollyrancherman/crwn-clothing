@@ -5,7 +5,7 @@ import categories from './../../categories.json';
 
 const Directory = () => {
   return (
-    <div className='directory grid grid-cols-6 gap-4 p-4'>
+    <div className='directory grid grid-cols-6 gap-4'>
       {categories.map((category) => (
         <Category key={category.id} category={category} />
       ))}

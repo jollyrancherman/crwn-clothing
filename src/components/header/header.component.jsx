@@ -1,12 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 
 const Header = () => {
   return (
-    <header className=' bg-cyan-100 p-6 flex justify-between shadow-md mb-2'>
-      {/* LOGO */}
-      <div className='logo'>Logo</div>
+    <header className=' bg-gray-800 p-6 flex justify-between items-center shadow mb-2 text-gray-50'>
+      <Link className='logo-container' to='/'>
+        <div className='logo'>
+          <CrwnLogo />
+        </div>
+      </Link>
 
-      {/* CLOTHING CART */}
+      <div className='navigation-links flex grow flex-row-reverse gap-12 pr-16'>
+        <Link className='nav-link' to='/sign-in'>
+          SIGN IN
+        </Link>
+
+        <Link className='nav-link' to='/shop'>
+          SHOP
+        </Link>
+      </div>
+
       <div className='clothing-cart'>Cart</div>
     </header>
   );
