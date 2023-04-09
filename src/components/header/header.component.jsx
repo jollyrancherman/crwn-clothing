@@ -12,7 +12,7 @@ const Header = () => {
       </Link>
 
       <div className='navigation-links flex grow flex-row-reverse gap-12 pr-16'>
-        <Link className='nav-link' to='/sign-in'>
+        <Link className='nav-link' to='/authorization'>
           SIGN IN
         </Link>
 
