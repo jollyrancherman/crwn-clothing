@@ -1,25 +1,17 @@
-import SignUpForm from '../../components/forms/sign-up-form.component';
-import {
-  createUserDocumentFromAuth,
-  signInWithGooglePopup,
-} from '../../ulils/firebase/firebase.utils';
+import SignInForm from '../../components/forms/sign-in-form/sign-in-form.component';
+import SignUpForm from '../../components/forms/sign-up-form/sign-up-form.component';
 
 const SignIn = () => {
-  const logInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
-    console.log({ userDocRef });
-  };
-
   return (
     <>
       <div className='flex'>
         <div className=' w-1/2'>
+          <h2>Don't have an account?</h2>
+          <p>Singup with your email and Password</p>
           <SignUpForm />
         </div>
-        <div>
-          <h1>Sign In</h1>
-          <button onClick={logInWithGoogle}>Google Sign In</button>
+        <div className=' w-1/2'>
+          <SignInForm />
         </div>
       </div>
     </>

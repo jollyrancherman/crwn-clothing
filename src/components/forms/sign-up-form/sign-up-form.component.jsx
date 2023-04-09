@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-} from '../../ulils/firebase/firebase.utils';
-import FormInput from './form-input/form-input.component';
+  signInWithGooglePopup,
+} from '../../../ulils/firebase/firebase.utils';
+import Button from '../../button/button.component';
+import FormInput from '../form-input/form-input.component';
 
 // const defaultFormFields = {
 //   displayName: 'Anthony',
@@ -21,6 +23,12 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
+  const logInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    const userDocRef = await createUserDocumentFromAuth(user);
+    console.log({ userDocRef });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -43,9 +51,12 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className=' flex flex-col p-4'>
+    <div className=''>
+      <h1>Sign In</h1>
+      <button onClick={logInWithGoogle}>Google Sign In</button>
+
       <h1>Sign up with your email and password</h1>
-      <form className='flex flex-col' onSubmit={handleSubmit}>
+      <form className='' onSubmit={handleSubmit}>
         <FormInput
           label='Display Name'
           type='text'
@@ -81,8 +92,7 @@ const SignUpForm = () => {
           name='confirmPassword'
           value={confirmPassword}
         />
-
-        <button type='submit'>Submit</button>
+        <Button type='submit'>Submit</Button>
       </form>
     </div>
   );
