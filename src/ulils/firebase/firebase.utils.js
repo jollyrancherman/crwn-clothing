@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -6,24 +6,25 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-} from 'firebase/auth';
+  onAuthStateChanged,
+} from "firebase/auth";
 
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyC5-AxYENmRS5C1FQ1r7OSXOsnpGx4ueWg',
-  authDomain: 'ztm-crwn-clothing-67aa2.firebaseapp.com',
-  projectId: 'ztm-crwn-clothing-67aa2',
-  storageBucket: 'ztm-crwn-clothing-67aa2.appspot.com',
-  messagingSenderId: '738895328901',
-  appId: '1:738895328901:web:283260d1453b2942c71bec',
+  apiKey: "AIzaSyC5-AxYENmRS5C1FQ1r7OSXOsnpGx4ueWg",
+  authDomain: "ztm-crwn-clothing-67aa2.firebaseapp.com",
+  projectId: "ztm-crwn-clothing-67aa2",
+  storageBucket: "ztm-crwn-clothing-67aa2.appspot.com",
+  messagingSenderId: "738895328901",
+  appId: "1:738895328901:web:283260d1453b2942c71bec",
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 
-googleProvider.setCustomParameters({ prompt: 'select_account' });
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
 export const auth = getAuth();
 export const signInWithGooglePopup = async () => {
@@ -37,7 +38,7 @@ export const createUserDocumentFromAuth = async (
   userAuth,
   additionalInformation = {}
 ) => {
-  const userDocRef = doc(db, 'users', userAuth.uid);
+  const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
@@ -52,7 +53,7 @@ export const createUserDocumentFromAuth = async (
         ...additionalInformation,
       });
     } catch (error) {
-      console.log('Error creating the user', { error });
+      console.log("Error creating the user", { error });
     }
   }
 
@@ -70,7 +71,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     );
     return response;
   } catch (error) {
-    console.log('An error has occurred', { error });
+    console.log("An error has occurred", { error });
   }
 };
 
@@ -80,3 +81,6 @@ export const signInUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
