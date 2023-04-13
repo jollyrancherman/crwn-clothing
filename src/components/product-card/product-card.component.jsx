@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../../context/cart.context";
 import Button from "../button/button.component";
 
 const ProductCard = ({ product }) => {
   const { price, name, imageUrl } = product;
+  const { addItemToCart } = useContext(CartContext);
+
+  const addItemToCartHandler = () => {
+    addItemToCart(product);
+  };
 
   return (
     <div className=" group m-4">
@@ -15,7 +21,9 @@ const ProductCard = ({ product }) => {
         }}
       >
         <div className=" h-full flex flex-col justify-end p-10 invisible group-hover:visible">
-          <Button buttonType="inverted">Add to cart</Button>
+          <Button buttonType="inverted" onClick={addItemToCartHandler}>
+            Add to cart
+          </Button>
         </div>
       </div>
       <div className=" flex justify-between">
