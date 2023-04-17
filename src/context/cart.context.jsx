@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from "react";
 
 const addCartItem = (item, cartItems) => {
   const itemExists = cartItems.find((cartItem) => cartItem.id === item.id);
@@ -68,7 +68,9 @@ export const CartProvider = ({ children }) => {
     );
 
     setCartCount(newCartCount);
+  }, [cartItems]);
 
+  useEffect(() => {
     const newPrice = cartItems.reduce(
       (totalPrice, item) => totalPrice + item.quantity * item.price,
       0
